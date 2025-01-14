@@ -1,12 +1,9 @@
 data "azurerm_resource_group" "example" {
   name     = "Terraform-RG"
-  location = "Sount India"
 }
 
 data "azurerm_virtual_network" "example" {
   name                = "example-network"
-  address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 }
 
@@ -14,15 +11,12 @@ data "azurerm_subnet" "example" {
   name                 = "internal"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.0.2.0/24"]
-  service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
 }
 
 resource "azurerm_storage_account" "example" {
-  name                = "storageaccountname"
+  name                = "azhimstoaccountaqaqaq"
   resource_group_name = azurerm_resource_group.example.name
-
-  location                 = azurerm_resource_group.example.location
+  location                 = "South India"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
