@@ -1,32 +1,33 @@
-data "azurerm_resource_group" "example" {
-  name     = "Terraform-RG"
-}
-
-data "azurerm_virtual_network" "example" {
+# Data block to fetch the existing virtual network and subnet
+data "azurerm_virtual_network" "existing_vnet" {
   name                = "example-network"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = "South India"
 }
 
-data "azurerm_subnet" "example" {
+data "azurerm_subnet" "existing_subnet" {
   name                 = "internal"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+  virtual_network_name = data.azurerm_virtual_network.existing_vnet.name
+  resource_group_name  = data.azurerm_virtual_network.existing_vnet.resource_group_name
 }
 
-resource "azurerm_storage_account" "example" {
-  name                = "azhimstoaccountaqaqaq"
-  resource_group_name = azurerm_resource_group.example.name
+# Create the storage account
+resource "azurerm_storage_account" "storage" {
+  name                     = "azhimstoaccountaqaqaq" # Must be globally unique
+  resource_group_name      = "Terraform-RG"
   location                 = "South India"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
   network_rules {
-    default_action             = "Deny"
-    ip_rules                   = ["100.0.0.1"]
-    virtual_network_subnet_ids = [azurerm_subnet.example.id]
-  }
+    default_action = "Deny"
 
-  tags = {
-    environment = "staging"
+    virtual_network_subnet_ids = [
+      data.azurerm_subnet.existing_subnet.id
+    ]
   }
+}
+
+# Output the storage account details
+output "storage_account_id" {
+  value = azurerm_storage_account.storage.id
 }
