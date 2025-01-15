@@ -36,11 +36,11 @@ resource "azurerm_storage_account" "storage" {
   network_rules {
     default_action = "Deny"
 
-    virtual_network_subnet_ids = [
-      data.azurerm_subnet.example.id
-    ]
+    // virtual_network_subnet_ids = [
+    //   data.azurerm_subnet.example.id
+    // ]
   }
 }
-// output "storage_account_id" {
-//   value = azurerm_storage_account.storage.id
-// }
+output "storage_account_id" {
+  value = azurerm_storage_account.storage.id
+}
