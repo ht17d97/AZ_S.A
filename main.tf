@@ -1,6 +1,5 @@
 data "azurerm_resource_group" "example" {
   name     = "azure-migration"
-  location = "South India"
 }
 data "azurerm_virtual_network" "existing_vnet" {
   name                = "example-network"
