@@ -20,8 +20,8 @@ data "azurerm_virtual_network" "existing_vnet" {
 //   }
 // }
 resource "azurerm_subnet" "example" {
-  name                 = "internal"
-  virtual_network_name = azurerm_virtual_network.existing_vnet.name
+  name                 = "Test-SA"
+  virtual_network_name = "example-network"
   resource_group_name  = "Terraform-RG"
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints = ["Microsoft.Storage"]
