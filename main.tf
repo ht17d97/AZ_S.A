@@ -3,7 +3,7 @@ data "azurerm_resource_group" "example" {
 }
 data "azurerm_virtual_network" "existing_vnet" {
   name                = "example-network"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = "Terraform-RG"
 }
 resource "azurerm_subnet_service_endpoint_storage_policy" "example" {
   name                = "SA-subnet-policy"
