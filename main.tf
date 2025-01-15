@@ -21,7 +21,7 @@ data "azurerm_virtual_network" "existing_vnet" {
 // }
 resource "azurerm_subnet" "example" {
   name                 = "internal"
-  virtual_network_name = azurerm_virtual_network.example.name
+  virtual_network_name = azurerm_virtual_network.existing_vnet.name
   resource_group_name  = "Terraform-RG"
   address_prefixes     = ["10.0.1.0/24"]
   service_endpoints = ["Microsoft.Storage"]
@@ -37,7 +37,7 @@ resource "azurerm_storage_account" "storage" {
     default_action = "Deny"
 
     virtual_network_subnet_ids = [
-      data.azurerm_subnet.existing_subnet.id
+      data.azurerm_subnet.example.id
     ]
   }
 }
