@@ -5,19 +5,26 @@ data "azurerm_virtual_network" "existing_vnet" {
   name                = "example-network"
   resource_group_name = "Terraform-RG"
 }
-resource "azurerm_subnet_service_endpoint_storage_policy" "example" {
-  name                = "SA-subnet-policy"
-  resource_group_name = "Terraform-RG"
-  location            = "South India"
-  definition {
-    name        = "MS.Storage"
-    description = "testing"
-    service     = "Microsoft.Storage"
-    # service_resources = [
-    #   azurerm_resource_group.example.id,
-    #   azurerm_storage_account.example.id
-    # ]
-  }
+// resource "azurerm_subnet_service_endpoint_storage_policy" "example" {
+//   name                = "SA-subnet-policy"
+//   resource_group_name = "Terraform-RG"
+//   location            = "South India"
+//   definition {
+//     name        = "MS.Storage"
+//     description = "testing"
+//     service     = "Microsoft.Storage"
+//     service_resources = [
+//       azurerm_resource_group.example.id,
+//       azurerm_storage_account.example.id
+//     ]
+//   }
+// }
+resource "azurerm_subnet" "example" {
+  name                 = "internal"
+  virtual_network_name = azurerm_virtual_network.example.name
+  resource_group_name  = "Terraform-RG"
+  address_prefixes     = ["10.0.1.0/24"]
+  service_endpoints = ["Microsoft.Storage"]
 }
 resource "azurerm_storage_account" "storage" {
   name                     = "azhimstoaccountaqaqaq" # Must be globally unique
