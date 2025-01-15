@@ -41,6 +41,6 @@ resource "azurerm_storage_account" "storage" {
     ]
   }
 }
-output "storage_account_id" {
-  value = azurerm_storage_account.storage.id
-}
+// output "storage_account_id" {
+//   value = azurerm_storage_account.storage.id
+// }
