@@ -7,7 +7,7 @@ data "azurerm_virtual_network" "existing_vnet" {
 }
 resource "azurerm_subnet_service_endpoint_storage_policy" "example" {
   name                = "SA-subnet-policy"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = "Terraform-RG"
   location            = "South India"
   definition {
     name        = "MS.Storage"
