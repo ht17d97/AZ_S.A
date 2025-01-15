@@ -13,10 +13,10 @@ resource "azurerm_subnet_service_endpoint_storage_policy" "example" {
     name        = "MS.Storage"
     description = "testing"
     service     = "Microsoft.Storage"
-    service_resources = [
-      azurerm_resource_group.example.id,
-      azurerm_storage_account.example.id
-    ]
+    # service_resources = [
+    #   azurerm_resource_group.example.id,
+    #   azurerm_storage_account.example.id
+    # ]
   }
 }
 resource "azurerm_storage_account" "storage" {
